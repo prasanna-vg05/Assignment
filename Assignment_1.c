@@ -77,9 +77,8 @@ void deleteAtBegining(struct node **head){
         return;
     }
     struct node *temp = *head;
-    temp = temp->next;
-    *head = temp;
-
+    *head = (*head)->next;    
+    free(temp);                
 }
 
 void deleteAtAny(struct node **head, int pos)
@@ -131,6 +130,18 @@ void printList(struct node * head)
     
 }
 
+
+
+void freeList(struct node **head) {
+    struct node *current = *head;
+    struct node *next_node;
+    while (current != NULL) {
+        next_node = current->next; 
+        free(current);            
+        current = next_node;       
+    }
+    *head = NULL; 
+}
 
 int main(){
     struct node *head = NULL;
@@ -204,7 +215,9 @@ int main(){
                     printf("Data %d not found in the list.\n", data);
                 break;
             case 0: 
+                freeList(&head);
                 printf("Exiting...\n");
+                
                 break;
             default:
                 printf("Invalid option! Try again.\n");
