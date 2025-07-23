@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "mocha": "^11.7.1",
+    "sinon": "^21.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "nodemon": "^3.0.0",
+    "nyc": "^17.1.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "go": "npm test",
+    "coverage": "nyc npm test",
+    "coverage:html": "nyc --reporter=html npm test",
+    "test:watch": "nodemon --exec \"npm test\""
+  }
+}
