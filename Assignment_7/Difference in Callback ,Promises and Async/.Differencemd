@@ -1,0 +1,72 @@
+# Callback, Promise, and Async/Await in JavaScript
+
+## Callback
+
+A callback defines that “Call me back when you're done.” It is a function that you pass to another function, and that function calls it back at the appropriate time — usually after something is done.
+
+**Example:**
+
+```javascript
+function greet(name, callback) {
+    console.log("Hi " + name);
+    callback(); // <-- calling back the function
+}
+
+function sayBye() {
+    console.log("Bye!");
+}
+
+greet("Alice", sayBye);
+```
+
+---
+
+## Promise
+
+A Promise is like "I promise I’ll give you the result when I’m done — either success or failure".  
+It is a placeholder for a result that isn't available yet but will be in the future.
+
+**Example:**
+
+```javascript
+function greet(name) {
+    return new Promise((resolve, reject) => {
+        if (!name) {
+            reject("No name provided");
+        } else {
+            resolve("Hi " + name);
+        }
+    });
+}
+
+greet("Alice")
+    .then(msg => {
+        console.log(msg); 
+    })
+    .catch(err => {
+        console.error(err);
+    });
+```
+
+---
+
+## Async/Await
+
+"I will wait until you finish, then give me the result. If you fail, I’ll catch the error."  
+`async` makes a function return a Promise.  
+`await` waits for that Promise to resolve (or throw).  
+It makes asynchronous code look synchronous, which is much easier to read and write.
+
+**Example:**
+
+```javascript
+const fs = require('fs').promises;
+
+async function readFileAsync() {
+    try {
+        const data = await fs.readFile('test.js', 'utf8');
+        console.log('File content:', data);
+    } catch (err) {
+        console.error('Error reading file:', err);
+    }
+}
